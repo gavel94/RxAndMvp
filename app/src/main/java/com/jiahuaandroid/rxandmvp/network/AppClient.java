@@ -28,6 +28,7 @@ public class AppClient {
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
     private Retrofit retrofit;
     private ApiService apiService;
+    public static String baseUrl = ApiService.BASE_URL;
 
     private static class SingletonHolder {
         private static final AppClient INSTANCE = new AppClient();
@@ -57,7 +58,7 @@ public class AppClient {
                 .client(okHttpClient)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJavaCallAdapterFactory)
-                .baseUrl("http://192.168.0.7:8080/")
+                .baseUrl(baseUrl)
                 .build();
 
         this.apiService = retrofit.create(ApiService.class);

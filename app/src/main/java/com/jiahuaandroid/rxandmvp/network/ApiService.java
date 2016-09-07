@@ -5,6 +5,6 @@ package com.jiahuaandroid.rxandmvp.network;
  * QQ:781913268
  * Description：ApiService
  */
-public interface ApiService {
-
+interface ApiService {
+    String BASE_URL = "http://192.168.0.7:8080/";
 }
