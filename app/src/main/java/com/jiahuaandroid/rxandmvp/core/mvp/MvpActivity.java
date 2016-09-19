@@ -10,7 +10,7 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
  * QQ:781913268
  * Description：MvpActivity
  */
-public abstract class MvpActivity<V extends ActivityView, T extends ActivityPresenterImpl<V>> extends RxAppCompatActivity {
+public abstract class MvpActivity<V extends ActivityView, T extends ActivityPresenter<V>> extends RxAppCompatActivity {
     private static final String TAG = "MvpActivity";
     protected T mPresenter;
 

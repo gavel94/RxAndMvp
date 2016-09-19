@@ -2,63 +2,48 @@ package com.jiahuaandroid.rxandmvp;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.jiahuaandroid.basetools.utils.LogUtil;
+import com.jiahuaandroid.rxandmvp.activity.SecondActivity;
+import com.jiahuaandroid.rxandmvp.activity.presenter.MainPresenterImpl;
+import com.jiahuaandroid.rxandmvp.activity.view.MainViewImpl;
+import com.jiahuaandroid.rxandmvp.core.BaseActivity;
 import com.jiahuaandroid.rxandmvp.databinding.ActivityMainBinding;
 
 import java.util.concurrent.TimeUnit;
 
-import rx.functions.Action1;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity<MainViewImpl, MainPresenterImpl> implements MainViewImpl
+{
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected MainPresenterImpl createPresenter()
+    {
+        return new MainPresenterImpl();
+    }
+
+    @Override
+    protected void loadContentView()
+    {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    }
+
+    @Override
+    protected void initEvent()
+    {
+        super.initEvent();
         RxView.clicks(binding.btnClick)
                 .throttleFirst(2, TimeUnit.SECONDS)
-                .subscribe(new Action1<Void>() {
-                    @Override
-                    public void call(Void aVoid) {
-                        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                .delay(2, TimeUnit.SECONDS)
+                .subscribe(aVoid -> action2second());
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LogUtil.e(TAG, "onStart : ");
+    public void action2second()
+    {
+        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LogUtil.e(TAG, "onResume : ");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LogUtil.e(TAG, "onPause : ");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        LogUtil.e(TAG, "onStop : ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LogUtil.e(TAG, "onDestroy : ");
-    }
 }

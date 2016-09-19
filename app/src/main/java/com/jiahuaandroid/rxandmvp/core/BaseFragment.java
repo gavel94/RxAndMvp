@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jiahuaandroid.rxandmvp.core.mvp.FragmentPresenterImpl;
+import com.jiahuaandroid.rxandmvp.core.mvp.FragmentPresenter;
 import com.jiahuaandroid.rxandmvp.core.mvp.MvpFragment;
 import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.FragmentView;
 
@@ -15,7 +15,7 @@ import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.FragmentView;
  * QQ:781913268
  * Description：BaseFragment
  */
-public abstract class BaseFragment<V extends FragmentView, T extends FragmentPresenterImpl<V>> extends MvpFragment<V, T> {
+public abstract class BaseFragment<V extends FragmentView, T extends FragmentPresenter<V>> extends MvpFragment<V, T> {
     private static final String TAG = "BaseFragment";
 
     @Nullable

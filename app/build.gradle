@@ -9,6 +9,11 @@ android {
             enabled true
         }
 
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
         applicationId "com.jiahuaandroid.rxandmvp"
         minSdkVersion 15
         targetSdkVersion 23

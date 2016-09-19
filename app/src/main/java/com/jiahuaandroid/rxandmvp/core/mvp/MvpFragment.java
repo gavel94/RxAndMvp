@@ -10,7 +10,7 @@ import com.trello.rxlifecycle.components.support.RxFragment;
  * QQ:781913268
  * Description：MvpFragment
  */
-public abstract class MvpFragment<V extends FragmentView, T extends FragmentPresenterImpl<V>> extends RxFragment {
+public abstract class MvpFragment<V extends FragmentView, T extends FragmentPresenter<V>> extends RxFragment {
     private static final String TAG = "MvpFragment";
     protected T mPresenter;
 

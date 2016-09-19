@@ -42,7 +42,7 @@ public class AppClient {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(new HeaderInterceptor())
-                .addInterceptor(new LoggerInterceptor("http"))
+                .addInterceptor(new LoggerInterceptor("http",true))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS);
 
@@ -80,7 +80,7 @@ public class AppClient {
             Log.d("AppClient", path + ">>>path");
             String query = request.url().query();
 //            if (BuildConfig.DEBUG) {
-//                Log.d("AppClient", query + ">>>query");
+            Log.d("AppClient", query + ">>>query");
 //            }
             //这里设置成你的全局header
             Map<String, String> headers = new HashMap<>();

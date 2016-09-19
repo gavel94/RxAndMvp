@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.jiahuaandroid.basetools.utils.ActivityCollector;
 import com.jiahuaandroid.basetools.utils.LogUtil;
 import com.jiahuaandroid.basetools.utils.StatusBarUtils;
-import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenterImpl;
+import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
 import com.jiahuaandroid.rxandmvp.core.mvp.MvpActivity;
 import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.ActivityView;
 
@@ -18,7 +18,7 @@ import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.ActivityView;
  * QQ:781913268
  * Description：BaseActivity
  */
-public abstract class BaseActivity<V extends ActivityView, T extends ActivityPresenterImpl<V>> extends MvpActivity<V, T> {
+public abstract class BaseActivity<V extends ActivityView, T extends ActivityPresenter<V>> extends MvpActivity<V, T> {
     private static final String TAG = "BaseActivity";
     protected Context mContext;
 
@@ -43,8 +43,32 @@ public abstract class BaseActivity<V extends ActivityView, T extends ActivityPre
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.i(TAG, "onDestroy : " + getClass().getName());
+        LogUtil.i(getClass().getName(), "onDestroy : ");
         ActivityCollector.removeActivity(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtil.e(getClass().getName(),"onStart : ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtil.e(getClass().getName(),"onResume : ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtil.e(getClass().getName(),"onPause : ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtil.e(getClass().getName(),"onStop : ");
     }
 
     /**

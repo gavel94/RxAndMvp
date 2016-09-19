@@ -9,10 +9,11 @@ import com.trello.rxlifecycle.LifecycleTransformer;
 /**
  * Created by jhhuang on 2016/8/26.
  * QQ:781913268
- * Description：ActivityPresenterImpl
+ * Description：ActivityPresenter
  */
-public class ActivityPresenterImpl<V extends ActivityView> extends PresenterImpl<V>{
-    private static final String TAG = "ActivityPresenterImpl";
+public class ActivityPresenter<V extends ActivityView> extends BasePresenter<V>
+{
+    private static final String TAG = "ActivityPresenter";
 
     public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
         return getMvpView().bindUntilEvent(event);

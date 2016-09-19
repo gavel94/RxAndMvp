@@ -9,10 +9,11 @@ import com.trello.rxlifecycle.LifecycleTransformer;
 /**
  * Created by jhhuang on 2016/8/26.
  * QQ:781913268
- * Description：FragmentPresenterImpl
+ * Description：FragmentPresenter
  */
-public class FragmentPresenterImpl<V extends FragmentView> extends PresenterImpl<V> {
-    private static final String TAG = "FragmentPresenterImpl";
+public class FragmentPresenter<V extends FragmentView> extends BasePresenter<V>
+{
+    private static final String TAG = "FragmentPresenter";
 
     public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull FragmentEvent event) {
         return getMvpView().bindUntilEvent(event);
