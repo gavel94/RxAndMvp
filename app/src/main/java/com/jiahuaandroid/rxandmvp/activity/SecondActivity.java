@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * QQ:781913268
  * Description：xxx
  */
-public class SecondActivity extends BaseActivity<SecondViewImpl, SecondPresenterImpl> implements SecondViewImpl
+public class SecondActivity extends BaseActivity<SecondPresenterImpl> implements SecondViewImpl
 {
     private static final String TAG = "SecondActivity";
     private ActivityMainBinding binding;

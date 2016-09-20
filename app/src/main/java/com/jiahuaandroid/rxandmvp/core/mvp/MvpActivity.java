@@ -10,26 +10,28 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
  * QQ:781913268
  * Description：MvpActivity
  */
-public abstract class MvpActivity<V extends ActivityView, T extends ActivityPresenter<V>> extends RxAppCompatActivity {
+public abstract class MvpActivity<T extends ActivityPresenter> extends RxAppCompatActivity implements ActivityView
+{
     private static final String TAG = "MvpActivity";
     protected T mPresenter;
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
-        mPresenter.attachView((V) this);
+        mPresenter.attachView(this);
     }
 
     /**
-     *
      * @return create presenter
      */
     protected abstract T createPresenter();
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
         mPresenter.detachView();
     }

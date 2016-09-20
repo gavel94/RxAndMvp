@@ -11,19 +11,20 @@ import com.jiahuaandroid.basetools.utils.LogUtil;
 import com.jiahuaandroid.basetools.utils.StatusBarUtils;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
 import com.jiahuaandroid.rxandmvp.core.mvp.MvpActivity;
-import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.ActivityView;
 
 /**
  * Created by jhhuang on 2016/8/26.
  * QQ:781913268
  * Description：BaseActivity
  */
-public abstract class BaseActivity<V extends ActivityView, T extends ActivityPresenter<V>> extends MvpActivity<V, T> {
+public abstract class BaseActivity<T extends ActivityPresenter> extends MvpActivity<T>
+{
     private static final String TAG = "BaseActivity";
     protected Context mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         LogUtil.i(TAG, "onCreate : " + getClass().getName());
         mContext = this;
@@ -35,40 +36,46 @@ public abstract class BaseActivity<V extends ActivityView, T extends ActivityPre
     }
 
     @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView(int layoutResID)
+    {
         super.setContentView(layoutResID);
         this.setStatusBar();
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
         LogUtil.i(getClass().getName(), "onDestroy : ");
         ActivityCollector.removeActivity(this);
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
-        LogUtil.e(getClass().getName(),"onStart : ");
+        LogUtil.e(getClass().getName(), "onStart : ");
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-        LogUtil.e(getClass().getName(),"onResume : ");
+        LogUtil.e(getClass().getName(), "onResume : ");
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
-        LogUtil.e(getClass().getName(),"onPause : ");
+        LogUtil.e(getClass().getName(), "onPause : ");
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
         super.onStop();
-        LogUtil.e(getClass().getName(),"onStop : ");
+        LogUtil.e(getClass().getName(), "onStop : ");
     }
 
     /**
@@ -81,26 +88,31 @@ public abstract class BaseActivity<V extends ActivityView, T extends ActivityPre
      *
      * @param savedInstanceState 状态信息
      */
-    protected void initViews(Bundle savedInstanceState) {
+    protected void initViews(Bundle savedInstanceState)
+    {
 
     }
 
     /**
      * initialize the Activity data
      */
-    protected void initData() {
+    protected void initData()
+    {
 
     }
 
     /**
      * initialize event
      */
-    protected void initEvent() {
+    protected void initEvent()
+    {
 
     }
 
-    protected void setStatusBar() {
-        if (!ifFullScreen()) {
+    protected void setStatusBar()
+    {
+        if (!ifFullScreen())
+        {
             StatusBarUtils.setColor(this, 0x47B3FE);
         }
     }
@@ -110,7 +122,8 @@ public abstract class BaseActivity<V extends ActivityView, T extends ActivityPre
      *
      * @return true？全屏：不是全屏
      */
-    protected boolean ifFullScreen() {
+    protected boolean ifFullScreen()
+    {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         return ((attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -118,7 +131,8 @@ public abstract class BaseActivity<V extends ActivityView, T extends ActivityPre
     /**
      * @param to 窗口透明度 1f表示正常。0表示全黑
      */
-    protected void backgroundAlpha(float to) {
+    protected void backgroundAlpha(float to)
+    {
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = to;
         getWindow().setAttributes(lp);
@@ -126,12 +140,13 @@ public abstract class BaseActivity<V extends ActivityView, T extends ActivityPre
     }
 
     /**
-     *
      * @param v 隐藏输入法
      */
-    protected void hideKeyboard(View v) {
+    protected void hideKeyboard(View v)
+    {
         InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm.isActive()) {
+        if (imm.isActive())
+        {
             imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
         }
     }

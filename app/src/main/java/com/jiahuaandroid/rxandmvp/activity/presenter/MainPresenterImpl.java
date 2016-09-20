@@ -12,4 +12,10 @@ public class MainPresenterImpl extends ActivityPresenter<MainViewImpl>
 {
     private static final String TAG = "MainPresenterImpl";
 
+    public void action2second()
+    {
+        if(isViewAttached()) {
+            getMvpView().action2second();
+        }
+    }
 }

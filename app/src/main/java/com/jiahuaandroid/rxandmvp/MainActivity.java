@@ -12,7 +12,7 @@ import com.jiahuaandroid.rxandmvp.databinding.ActivityMainBinding;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends BaseActivity<MainViewImpl, MainPresenterImpl> implements MainViewImpl
+public class MainActivity extends BaseActivity<MainPresenterImpl> implements MainViewImpl
 {
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
@@ -36,10 +36,11 @@ public class MainActivity extends BaseActivity<MainViewImpl, MainPresenterImpl> 
         RxView.clicks(binding.btnClick)
                 .throttleFirst(2, TimeUnit.SECONDS)
                 .delay(2, TimeUnit.SECONDS)
-                .subscribe(aVoid -> action2second());
+                .subscribe(v -> mPresenter.action2second());
 
     }
 
+    @Override
     public void action2second()
     {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);

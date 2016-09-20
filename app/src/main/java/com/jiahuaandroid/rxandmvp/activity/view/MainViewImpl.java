@@ -10,4 +10,5 @@ import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.ActivityView;
 public interface MainViewImpl extends ActivityView
 {
 
+    void action2second();
 }

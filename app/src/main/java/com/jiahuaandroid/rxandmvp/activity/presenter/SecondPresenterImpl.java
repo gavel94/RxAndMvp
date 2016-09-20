@@ -28,7 +28,10 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
                 .compose(bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new ResponseFunc<>())
-                .subscribe(dataEntities -> LogUtil.e(TAG, "loadUserList : " + dataEntities.size()), new ThrowableAction1());
+                .subscribe(
+                        dataEntities -> LogUtil.e(TAG, "loadUserList : " + dataEntities.size()),
+                        new ThrowableAction1()
+                );
 //        AppClient.getInstance().create().getUserList()
 //                .compose(bindToLifecycle())
 //                .subscribeOn(Schedulers.io())

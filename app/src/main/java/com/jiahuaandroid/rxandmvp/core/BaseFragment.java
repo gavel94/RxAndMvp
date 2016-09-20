@@ -8,24 +8,26 @@ import android.view.ViewGroup;
 
 import com.jiahuaandroid.rxandmvp.core.mvp.FragmentPresenter;
 import com.jiahuaandroid.rxandmvp.core.mvp.MvpFragment;
-import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.FragmentView;
 
 /**
  * Created by jhhuang on 2016/8/26.
  * QQ:781913268
  * Description：BaseFragment
  */
-public abstract class BaseFragment<V extends FragmentView, T extends FragmentPresenter<V>> extends MvpFragment<V, T> {
+public abstract class BaseFragment<T extends FragmentPresenter> extends MvpFragment<T>
+{
     private static final String TAG = "BaseFragment";
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         return loadContentView(inflater, container, savedInstanceState);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
         this.initViews(savedInstanceState);
         this.initData();
@@ -42,21 +44,24 @@ public abstract class BaseFragment<V extends FragmentView, T extends FragmentPre
      *
      * @param savedInstanceState
      */
-    protected void initViews(Bundle savedInstanceState) {
+    protected void initViews(Bundle savedInstanceState)
+    {
 
     }
 
     /**
      * initialize the Activity data
      */
-    protected void initData() {
+    protected void initData()
+    {
 
     }
 
     /**
      * initialize event
      */
-    protected void initEvent() {
+    protected void initEvent()
+    {
 
     }
 }

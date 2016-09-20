@@ -10,23 +10,26 @@ import com.trello.rxlifecycle.components.support.RxFragment;
  * QQ:781913268
  * Description：MvpFragment
  */
-public abstract class MvpFragment<V extends FragmentView, T extends FragmentPresenter<V>> extends RxFragment {
+public abstract class MvpFragment<T extends FragmentPresenter> extends RxFragment implements FragmentView
+{
     private static final String TAG = "MvpFragment";
     protected T mPresenter;
 
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
-        mPresenter.attachView((V) this);
+        mPresenter.attachView(this);
     }
 
     protected abstract T createPresenter();
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
         mPresenter.detachView();
     }
