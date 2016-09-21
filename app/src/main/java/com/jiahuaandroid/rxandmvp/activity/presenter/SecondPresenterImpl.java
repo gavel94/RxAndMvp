@@ -5,7 +5,8 @@ import android.content.Context;
 import com.jiahuaandroid.basetools.utils.LogUtil;
 import com.jiahuaandroid.rxandmvp.activity.view.SecondViewImpl;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
-import com.jiahuaandroid.rxandmvp.network.AppClient;
+import com.jiahuaandroid.rxandmvp.network.ApiService;
+import com.jiahuaandroid.rxandmvp.network.ClientManager;
 import com.jiahuaandroid.rxandmvp.network.ResponseFunc;
 import com.jiahuaandroid.rxandmvp.network.ThrowableAction1;
 
@@ -23,7 +24,7 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
 
     public void loadUserList(Context mContext)
     {
-        AppClient.getInstance().create().getUserList()
+        ClientManager.getClient(ApiService.BASE_URL).create().getUserList()
                 .subscribeOn(Schedulers.io())
                 .compose(bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())

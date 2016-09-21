@@ -23,26 +23,28 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * QQ:781913268
  * Description：AppClient
  */
-public class AppClient {
+public class AppClient
+{
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
     private Retrofit retrofit;
     private ApiService apiService;
     public static String baseUrl = ApiService.BASE_URL;
 
-    private static class SingletonHolder {
-        private static final AppClient INSTANCE = new AppClient();
-    }
+//    private static class SingletonHolder {
+//        private static final AppClient INSTANCE = new AppClient();
+//    }
+//
+//    public static AppClient getInstance() {
+//        return SingletonHolder.INSTANCE;
+//    }
 
-    public static AppClient getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
-
-    private AppClient() {
+    public AppClient()
+    {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(new HeaderInterceptor())
-                .addInterceptor(new LoggerInterceptor("http",true))
+                .addInterceptor(new LoggerInterceptor("http", true))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS);
 
@@ -64,17 +66,49 @@ public class AppClient {
         this.apiService = retrofit.create(ApiService.class);
     }
 
-    public ApiService create() {
+    public AppClient(String url)
+    {
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .addInterceptor(new HeaderInterceptor())
+                .addInterceptor(new LoggerInterceptor("http", true))
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS);
+
+//        if (BuildConfig.DEBUG) {
+//            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            builder.addInterceptor(loggingInterceptor);
+//        }
+
+        OkHttpClient okHttpClient = builder.build();
+
+        retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                .baseUrl(url)
+                .build();
+
+        this.apiService = retrofit.create(ApiService.class);
+    }
+
+
+
+    public ApiService create()
+    {
         return apiService;
     }
 
     /**
      * 全局头信息
      */
-    class HeaderInterceptor implements Interceptor {
+    class HeaderInterceptor implements Interceptor
+    {
 
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public Response intercept(Chain chain) throws IOException
+        {
             Request request = chain.request();
             String path = request.url().encodedPath();
             Log.d("AppClient", path + ">>>path");
