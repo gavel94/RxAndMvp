@@ -5,9 +5,11 @@ package com.jiahuaandroid.rxandmvp.core.mvp.interfaces;
  * QQ:781913268
  * Description：Presenter
  */
-public interface Presenter<V extends MvpView> {
+public interface Presenter<V extends MvpView>
+{
     /**
      * 关联
+     *
      * @param mvpView 视图层代表
      */
     void attachView(V mvpView);

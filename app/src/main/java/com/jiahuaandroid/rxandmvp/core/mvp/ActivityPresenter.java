@@ -15,11 +15,13 @@ public class ActivityPresenter<V extends ActivityView> extends BasePresenter<V>
 {
     private static final String TAG = "ActivityPresenter";
 
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
+    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event)
+    {
         return getMvpView().bindUntilEvent(event);
     }
 
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
+    public final <T> LifecycleTransformer<T> bindToLifecycle()
+    {
         return getMvpView().bindToLifecycle();
     }
 }

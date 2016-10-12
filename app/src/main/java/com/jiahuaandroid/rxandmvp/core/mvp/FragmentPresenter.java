@@ -15,11 +15,13 @@ public class FragmentPresenter<V extends FragmentView> extends BasePresenter<V>
 {
     private static final String TAG = "FragmentPresenter";
 
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull FragmentEvent event) {
+    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull FragmentEvent event)
+    {
         return getMvpView().bindUntilEvent(event);
     }
 
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
+    public final <T> LifecycleTransformer<T> bindToLifecycle()
+    {
         return getMvpView().bindToLifecycle();
     }
 }

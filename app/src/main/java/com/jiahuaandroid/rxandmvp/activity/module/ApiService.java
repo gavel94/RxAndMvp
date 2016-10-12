@@ -14,7 +14,8 @@ import rx.Observable;
  * QQ:781913268
  * Description：ApiService
  */
-public interface ApiService {
+public interface ApiService
+{
     String BASE_URL = "http://192.168.1.240:9080/";
 
     @POST("auth-web-1.0/user/login_user_list")

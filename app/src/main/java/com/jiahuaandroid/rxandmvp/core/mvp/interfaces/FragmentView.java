@@ -9,7 +9,8 @@ import com.trello.rxlifecycle.LifecycleTransformer;
  * Description：FragmentView
  */
 
-public interface FragmentView extends MvpView {
+public interface FragmentView extends MvpView
+{
     <T> LifecycleTransformer<T> bindUntilEvent(FragmentEvent event);
 
     <T> LifecycleTransformer<T> bindToLifecycle();

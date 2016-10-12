@@ -6,5 +6,6 @@ package com.jiahuaandroid.rxandmvp.core.mvp.interfaces;
  * Description：Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
  */
 
-public interface MvpView {
+public interface MvpView
+{
 }

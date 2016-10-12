@@ -40,7 +40,6 @@ public class AppClient
 
     public AppClient()
     {
-
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(new HeaderInterceptor())
                 .addInterceptor(new LoggerInterceptor("http", true))
@@ -89,7 +88,6 @@ public class AppClient
                 .build();
 
     }
-
 
 
     public <T> T create(Class<T> clazz)

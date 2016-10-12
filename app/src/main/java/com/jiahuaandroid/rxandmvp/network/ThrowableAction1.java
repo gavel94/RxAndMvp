@@ -16,7 +16,7 @@ public class ThrowableAction1 implements Action1<Throwable>
     @Override
     public void call(Throwable throwable)
     {
-        LogUtil.e(TAG,"call : throwable = "+throwable.getMessage());
-        LogUtil.e(TAG,"call : Thread = "+Thread.currentThread().getName());
+        LogUtil.e(TAG, "call : throwable = " + throwable.getMessage());
+        LogUtil.e(TAG, "call : Thread = " + Thread.currentThread().getName());
     }
 }

@@ -19,7 +19,7 @@ public class ClientManager
 
     }
 
-    public static  AppClient getClient(String url)
+    public static AppClient getClient(String url)
     {
         AppClient appClient;
         appClient = clientMap.get(url);
@@ -35,7 +35,8 @@ public class ClientManager
 
     public static void registerClient(String url)
     {
-        if(!clientMap.containsKey(url)) {
+        if (!clientMap.containsKey(url))
+        {
             AppClient client = new AppClient(url);
             clientMap.put(url, client);
         }

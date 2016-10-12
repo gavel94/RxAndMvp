@@ -9,7 +9,8 @@ import com.trello.rxlifecycle.LifecycleTransformer;
  * Description：ActivityView
  */
 
-public interface ActivityView extends MvpView{
+public interface ActivityView extends MvpView
+{
 
     <T> LifecycleTransformer<T> bindUntilEvent(ActivityEvent event);
 

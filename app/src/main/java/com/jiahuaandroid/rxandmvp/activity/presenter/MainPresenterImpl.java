@@ -14,7 +14,8 @@ public class MainPresenterImpl extends ActivityPresenter<MainViewImpl>
 
     public void action2second()
     {
-        if(isViewAttached()) {
+        if (isViewAttached())
+        {
             getMvpView().action2second();
         }
     }

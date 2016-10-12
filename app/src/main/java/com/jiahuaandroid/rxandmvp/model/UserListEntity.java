@@ -25,38 +25,47 @@ public class UserListEntity
 
     private List<DataEntity> data;
 
-    public int getCode() {
+    public int getCode()
+    {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(int code)
+    {
         this.code = code;
     }
 
-    public String getMsg() {
+    public String getMsg()
+    {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMsg(String msg)
+    {
         this.msg = msg;
     }
 
-    public List<DataEntity> getData() {
+    public List<DataEntity> getData()
+    {
         return data;
     }
 
-    public void setData(List<DataEntity> data) {
+    public void setData(List<DataEntity> data)
+    {
         this.data = data;
     }
 
-    public static class DataEntity {
+    public static class DataEntity
+    {
         private String realNameNo;
 
-        public String getRealNameNo() {
+        public String getRealNameNo()
+        {
             return realNameNo;
         }
 
-        public void setRealNameNo(String realNameNo) {
+        public void setRealNameNo(String realNameNo)
+        {
             this.realNameNo = realNameNo;
         }
     }

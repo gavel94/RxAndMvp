@@ -10,11 +10,13 @@ import com.jiahuaandroid.basetools.utils.LogUtil;
  * QQ:781913268
  * Description：MyApplication
  */
-public class MyApplication extends Application {
+public class MyApplication extends Application
+{
     private static final String TAG = "MyApplication";
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         CUtils.init(this);
         LogUtil.debug(LogUtil.VERBOSE);
