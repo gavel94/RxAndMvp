@@ -27,9 +27,8 @@ public class AppClient
 {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
+    public static String baseUrl = "http://192.168.1.240:9080/";
     private Retrofit retrofit;
-    private ApiService apiService;
-    public static String baseUrl = ApiService.BASE_URL;
 
 //    private static class SingletonHolder {
 //        private static final AppClient INSTANCE = new AppClient();
@@ -63,7 +62,6 @@ public class AppClient
                 .baseUrl(baseUrl)
                 .build();
 
-        this.apiService = retrofit.create(ApiService.class);
     }
 
     public AppClient(String url)
@@ -90,14 +88,13 @@ public class AppClient
                 .baseUrl(url)
                 .build();
 
-        this.apiService = retrofit.create(ApiService.class);
     }
 
 
 
-    public ApiService create()
+    public <T> T create(Class<T> clazz)
     {
-        return apiService;
+        return retrofit.create(clazz);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.jiahuaandroid.rxandmvp.core;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,6 +34,13 @@ public abstract class BaseActivity<T extends ActivityPresenter> extends MvpActiv
         this.initViews(savedInstanceState);
         this.initData();
         this.initEvent();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 
     @Override

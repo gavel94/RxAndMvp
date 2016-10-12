@@ -23,13 +23,12 @@ public class ClientManager
     {
         AppClient appClient;
         appClient = clientMap.get(url);
-        if (appClient != null)
-        {
-            return appClient;
-        }
 
-        appClient = new AppClient(url);
-        clientMap.put(url, appClient);
+        if (appClient == null)
+        {
+            appClient = new AppClient(url);
+            clientMap.put(url, appClient);
+        }
 
         return appClient;
     }

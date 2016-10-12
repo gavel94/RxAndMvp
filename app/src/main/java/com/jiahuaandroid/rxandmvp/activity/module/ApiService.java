@@ -1,7 +1,8 @@
-package com.jiahuaandroid.rxandmvp.network;
+package com.jiahuaandroid.rxandmvp.activity.module;
 
 
 import com.jiahuaandroid.rxandmvp.model.UserListEntity;
+import com.jiahuaandroid.rxandmvp.network.DataResponse;
 
 import java.util.List;
 
