@@ -2,6 +2,8 @@ package com.jiahuaandroid.rxandmvp.network;
 
 import android.util.Log;
 
+import com.jiahuaandroid.rxandmvp.BuildConfig;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,15 +44,13 @@ public class AppClient
     {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(new HeaderInterceptor())
-                .addInterceptor(new LoggerInterceptor("http", true))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS);
 
-//        if (BuildConfig.DEBUG) {
-//            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//            builder.addInterceptor(loggingInterceptor);
-//        }
+        if (BuildConfig.DEBUG)
+        {
+            builder.addInterceptor(new LoggerInterceptor("http", true));
+        }
 
         OkHttpClient okHttpClient = builder.build();
 
@@ -68,15 +68,13 @@ public class AppClient
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(new HeaderInterceptor())
-                .addInterceptor(new LoggerInterceptor("http", true))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS);
 
-//        if (BuildConfig.DEBUG) {
-//            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//            builder.addInterceptor(loggingInterceptor);
-//        }
+        if (BuildConfig.DEBUG)
+        {
+            builder.addInterceptor(new LoggerInterceptor("http", true));
+        }
 
         OkHttpClient okHttpClient = builder.build();
 
@@ -108,9 +106,10 @@ public class AppClient
             String path = request.url().encodedPath();
             Log.d("AppClient", path + ">>>path");
             String query = request.url().query();
-//            if (BuildConfig.DEBUG) {
-            Log.d("AppClient", query + ">>>query");
-//            }
+            if (BuildConfig.DEBUG)
+            {
+                Log.d("AppClient", query + ">>>query");
+            }
             //这里设置成你的全局header
             Map<String, String> headers = new HashMap<>();
             Request interRequest = chain.request().newBuilder()

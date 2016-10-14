@@ -16,7 +16,7 @@ import rx.Observable;
  */
 public interface ApiService
 {
-    String BASE_URL = "http://192.168.1.240:9080/";
+    String HOST_URL = "http://192.168.1.240:9080/";
 
     @POST("auth-web-1.0/user/login_user_list")
     Observable<DataResponse<List<UserListEntity.DataEntity>>> getUserList();

@@ -2,6 +2,7 @@ package com.jiahuaandroid.rxandmvp.core;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -121,7 +122,7 @@ public abstract class BaseActivity<T extends ActivityPresenter> extends MvpActiv
     {
         if (!ifFullScreen())
         {
-            StatusBarUtils.setColor(this, 0x47B3FE);
+            StatusBarUtils.setColor(this, Color.parseColor("#47B3FE"));
         }
     }
 

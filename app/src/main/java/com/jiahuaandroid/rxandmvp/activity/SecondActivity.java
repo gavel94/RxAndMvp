@@ -39,6 +39,9 @@ public class SecondActivity extends BaseActivity<SecondPresenterImpl> implements
         super.initEvent();
         RxView.clicks(binding.btnClick)
                 .throttleFirst(2, TimeUnit.SECONDS)
-                .subscribe(aVoid -> mPresenter.loadUserList(mContext));
+                .subscribe(
+                        aVoid -> {
+                            mPresenter.loadUserList(mContext);
+                        });
     }
 }

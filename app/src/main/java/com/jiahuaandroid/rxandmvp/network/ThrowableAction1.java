@@ -18,5 +18,6 @@ public class ThrowableAction1 implements Action1<Throwable>
     {
         LogUtil.e(TAG, "call : throwable = " + throwable.getMessage());
         LogUtil.e(TAG, "call : Thread = " + Thread.currentThread().getName());
+        throwable.printStackTrace();
     }
 }

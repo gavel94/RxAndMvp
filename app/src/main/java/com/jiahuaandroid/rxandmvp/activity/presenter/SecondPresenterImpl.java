@@ -3,15 +3,13 @@ package com.jiahuaandroid.rxandmvp.activity.presenter;
 import android.content.Context;
 
 import com.jiahuaandroid.basetools.utils.LogUtil;
+import com.jiahuaandroid.rxandmvp.activity.module.ApiService;
 import com.jiahuaandroid.rxandmvp.activity.view.SecondViewImpl;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
-import com.jiahuaandroid.rxandmvp.activity.module.ApiService;
 import com.jiahuaandroid.rxandmvp.network.ClientManager;
 import com.jiahuaandroid.rxandmvp.network.ResponseFunc;
 import com.jiahuaandroid.rxandmvp.network.ThrowableAction1;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import com.jiahuaandroid.rxandmvp.utils.RxUtils;
 
 /**
  * Created by jhhuang on 2016/9/18.
@@ -24,10 +22,11 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
 
     public void loadUserList(Context mContext)
     {
-        ClientManager.getClient(ApiService.BASE_URL).create(ApiService.class).getUserList()
-                .subscribeOn(Schedulers.io())
+        ClientManager.getClient(ApiService.HOST_URL).create(ApiService.class).getUserList()
+//                .subscribeOn(Schedulers.io())
                 .compose(bindToLifecycle())
-                .observeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxUtils.rxSchedulerHelper())
                 .map(new ResponseFunc<>())
                 .subscribe(
                         dataEntities -> LogUtil.e(TAG, "loadUserList : " + dataEntities.size()),

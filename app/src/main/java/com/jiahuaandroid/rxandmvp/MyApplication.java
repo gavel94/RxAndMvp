@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.jiahuaandroid.basetools.utils.CUtils;
 import com.jiahuaandroid.basetools.utils.LogUtil;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 /**
  * Created by jhhuang on 2016/8/24.
@@ -20,5 +21,6 @@ public class MyApplication extends Application
         super.onCreate();
         CUtils.init(this);
         LogUtil.debug(LogUtil.VERBOSE);
+        RxPermissions.getInstance(this).setLogging(BuildConfig.DEBUG);
     }
 }
