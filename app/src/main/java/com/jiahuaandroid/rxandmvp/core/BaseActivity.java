@@ -63,28 +63,28 @@ public abstract class BaseActivity<T extends ActivityPresenter> extends MvpActiv
     protected void onStart()
     {
         super.onStart();
-        LogUtil.e(getClass().getName(), "onStart : ");
+        LogUtil.i(getClass().getName(), "onStart : ");
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        LogUtil.e(getClass().getName(), "onResume : ");
+        LogUtil.i(getClass().getName(), "onResume : ");
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
-        LogUtil.e(getClass().getName(), "onPause : ");
+        LogUtil.i(getClass().getName(), "onPause : ");
     }
 
     @Override
     protected void onStop()
     {
         super.onStop();
-        LogUtil.e(getClass().getName(), "onStop : ");
+        LogUtil.i(getClass().getName(), "onStop : ");
     }
 
     /**

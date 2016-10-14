@@ -25,6 +25,9 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
 {
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
+    private String[] permissions = {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+            , Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
     protected MainPresenterImpl createPresenter()
@@ -43,7 +46,7 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
     {
         super.onCreate(savedInstanceState);
         RxBus.getDefault().toObserverable(NetWorkChangeEvent.class)
-//                .compose(bindToLifecycle())
+                .compose(bindToLifecycle())
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribe(
                         event -> {
@@ -66,14 +69,8 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
         RxView.clicks(binding.btnClick)
                 .throttleFirst(2, TimeUnit.SECONDS)
                 .delay(2, TimeUnit.SECONDS)
-                .compose(RxPermissions.getInstance(mContext).ensureEach(
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                .filter(permission -> {
-                    LogUtil.e(TAG, "call : " + permission);
-                    return permission.granted;
-                })
-                .buffer(2)
+                .compose(RxPermissions.getInstance(mContext).ensureEach(permissions))
+                .buffer(permissions.length)
                 .map(permissions -> {
                     boolean hasPermission = true;
                     for (Permission permission : permissions)
