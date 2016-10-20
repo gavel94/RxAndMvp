@@ -8,6 +8,7 @@ import com.jiahuaandroid.rxandmvp.activity.view.SecondViewImpl;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
 import com.jiahuaandroid.rxandmvp.network.ClientManager;
 import com.jiahuaandroid.rxandmvp.network.ResponseFunc;
+import com.jiahuaandroid.rxandmvp.network.RetryWithDelay;
 import com.jiahuaandroid.rxandmvp.network.ThrowableAction1;
 import com.jiahuaandroid.rxandmvp.utils.RxUtils;
 
@@ -27,9 +28,11 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
                 .compose(bindToLifecycle())
 //                .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxUtils.rxSchedulerHelper())
+                .retryWhen(new RetryWithDelay(3,100))
                 .map(new ResponseFunc<>())
+
                 .subscribe(
-                        dataEntities -> LogUtil.e(TAG, "loadUserList : " + dataEntities.size()),
+                        dataEntities -> LogUtil.e(TAG, "loadUserList : " + dataEntities),
                         new ThrowableAction1()
                 );
 //        AppClient.getInstance().create().getUserList()

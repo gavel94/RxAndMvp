@@ -1,10 +1,7 @@
 package com.jiahuaandroid.rxandmvp.activity.module;
 
 
-import com.jiahuaandroid.rxandmvp.model.UserListEntity;
 import com.jiahuaandroid.rxandmvp.network.DataResponse;
-
-import java.util.List;
 
 import retrofit2.http.POST;
 import rx.Observable;
@@ -16,8 +13,8 @@ import rx.Observable;
  */
 public interface ApiService
 {
-    String HOST_URL = "http://192.168.1.240:9080/";
+    String HOST_URL = "http://192.168.0.107/";
 
-    @POST("auth-web-1.0/user/login_user_list")
-    Observable<DataResponse<List<UserListEntity.DataEntity>>> getUserList();
+    @POST("android/testString")
+    Observable<DataResponse<String>> getUserList();
 }

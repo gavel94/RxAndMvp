@@ -3,6 +3,7 @@ package com.jiahuaandroid.rxandmvp.network;
 import android.util.Log;
 
 import com.jiahuaandroid.rxandmvp.BuildConfig;
+import com.jiahuaandroid.rxandmvp.network.modify.GsonConverterFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by jhhuang on 2016/5/19.
@@ -28,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppClient
 {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
+    private static Converter.Factory scalarsconverterfactory = ScalarsConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
     public static String baseUrl = "http://192.168.1.240:9080/";
     private Retrofit retrofit;
@@ -56,6 +58,7 @@ public class AppClient
 
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
+                .addConverterFactory(scalarsconverterfactory)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJavaCallAdapterFactory)
                 .baseUrl(baseUrl)
