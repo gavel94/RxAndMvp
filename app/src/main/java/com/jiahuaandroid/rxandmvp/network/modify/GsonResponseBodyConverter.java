@@ -34,6 +34,7 @@ public  class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T>
         try
         {
             //ResultResponse 只解析code字段进行约定异常处理
+            // TODO: 2016/10/21 需要自己定制自己的统一数据格式
             ResultResponse resultResponse = gson.fromJson(response, ResultResponse.class);
             if (resultResponse.getCode() == 2000)
             {
@@ -46,6 +47,7 @@ public  class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T>
             }
         } finally
         {
+            value.close();
         }
     }
 }

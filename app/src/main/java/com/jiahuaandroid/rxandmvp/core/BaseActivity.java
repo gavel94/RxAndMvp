@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.jiahuaandroid.basetools.utils.ActivityCollector;
+import com.jiahuaandroid.basetools.utils.CUtils;
 import com.jiahuaandroid.basetools.utils.LogUtil;
 import com.jiahuaandroid.basetools.utils.StatusBarUtils;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
@@ -160,4 +161,24 @@ public abstract class BaseActivity<T extends ActivityPresenter> extends MvpActiv
         }
     }
 
+    @Override
+    public void hideLoading()
+    {
+        // TODO: 2016/10/21 显示通用联网加载提示
+    }
+
+    @Override
+    public void showLoading()
+    {
+        // TODO: 2016/10/21 隐藏通用联网加载提示
+    }
+
+    @Override
+    public void toast(String msg)
+    {
+        /**
+         * toast数据
+         */
+        CUtils.showMsg(msg);
+    }
 }

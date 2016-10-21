@@ -28,6 +28,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 public class AppClient
 {
+    /**
+     * 自己处理过的gson转换器。详情：com.jiahuaandroid.rxandmvp.network.modify.GsonResponseBodyConverter
+     */
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static Converter.Factory scalarsconverterfactory = ScalarsConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();

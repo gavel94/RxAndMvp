@@ -9,8 +9,10 @@ import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
 import com.jiahuaandroid.rxandmvp.network.ClientManager;
 import com.jiahuaandroid.rxandmvp.network.ResponseFunc;
 import com.jiahuaandroid.rxandmvp.network.RetryWithDelay;
-import com.jiahuaandroid.rxandmvp.network.ThrowableAction1;
 import com.jiahuaandroid.rxandmvp.utils.RxUtils;
+
+import rx.Subscriber;
+import rx.functions.Action0;
 
 /**
  * Created by jhhuang on 2016/9/18.
@@ -23,19 +25,50 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
 
     public void loadUserList(Context mContext)
     {
-        ClientManager.getClient(ApiService.HOST_URL).create(ApiService.class).getUserList()
+        ClientManager.getClient(ApiService.HOST_URL).create(ApiService.class).testString()
 //                .subscribeOn(Schedulers.io())
                 .compose(bindToLifecycle())
 //                .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxUtils.rxSchedulerHelper())
-                .retryWhen(new RetryWithDelay(3,100))
+                .retryWhen(new RetryWithDelay(3, 100))
+                .doOnCompleted(new Action0()
+                {
+                    @Override
+                    public void call()
+                    {
+                        LogUtil.e(TAG, "doOnCompleted : thread = " + Thread.currentThread().getName());
+                    }
+                })
+                .doOnError(error -> {
+                    LogUtil.e(TAG, "doOnError : thread = " + Thread.currentThread().getName());
+                    error.printStackTrace();
+                })
                 .map(new ResponseFunc<>())
+//                .subscribe(
+//                        str -> LogUtil.e(TAG, "str : " + str),
+//                        new ThrowableAction1()
+//                );
+                .subscribe(new Subscriber<String>()
+                {
+                    @Override
+                    public void onCompleted()
+                    {
+                        LogUtil.e(TAG, "onCompleted :thread = " + Thread.currentThread().getName());
+                    }
 
-                .subscribe(
-                        dataEntities -> LogUtil.e(TAG, "loadUserList : " + dataEntities),
-                        new ThrowableAction1()
-                );
-//        AppClient.getInstance().create().getUserList()
+                    @Override
+                    public void onError(Throwable e)
+                    {
+                        LogUtil.e(TAG, "onError : thread = " + Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void onNext(String s)
+                    {
+                        LogUtil.e(TAG, "onNext : thread = " + Thread.currentThread().getName());
+                    }
+                });
+//        AppClient.getInstance().create().testString()
 //                .compose(bindToLifecycle())
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())

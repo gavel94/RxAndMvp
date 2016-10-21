@@ -18,6 +18,11 @@ public class RetryWithDelay implements Func1<Observable<? extends Throwable>, Ob
     private final int retryDelayMillis;
     private int retryCount;
 
+    public RetryWithDelay()
+    {
+        this(3, 20);
+    }
+
     public RetryWithDelay(int maxRetries, int retryDelayMillis)
     {
         this.maxRetries = maxRetries;

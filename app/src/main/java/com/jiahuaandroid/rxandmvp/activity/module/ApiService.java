@@ -16,5 +16,5 @@ public interface ApiService
     String HOST_URL = "http://192.168.0.107/";
 
     @POST("android/testString")
-    Observable<DataResponse<String>> getUserList();
+    Observable<DataResponse<String>> testString();
 }
