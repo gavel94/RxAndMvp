@@ -7,7 +7,6 @@ import com.jiahuaandroid.rxandmvp.activity.module.ApiService;
 import com.jiahuaandroid.rxandmvp.activity.view.SecondViewImpl;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
 import com.jiahuaandroid.rxandmvp.network.ClientManager;
-import com.jiahuaandroid.rxandmvp.network.ResponseFunc;
 import com.jiahuaandroid.rxandmvp.network.RetryWithDelay;
 import com.jiahuaandroid.rxandmvp.utils.RxUtils;
 
@@ -43,7 +42,7 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
                     LogUtil.e(TAG, "doOnError : thread = " + Thread.currentThread().getName());
                     error.printStackTrace();
                 })
-                .map(new ResponseFunc<>())
+                .map(listDataResponse -> listDataResponse.getData())
 //                .subscribe(
 //                        str -> LogUtil.e(TAG, "str : " + str),
 //                        new ThrowableAction1()
