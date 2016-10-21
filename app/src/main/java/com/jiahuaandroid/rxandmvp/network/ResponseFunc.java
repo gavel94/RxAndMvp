@@ -14,9 +14,6 @@ public class ResponseFunc<T> implements Func1<DataResponse<T>, T>
     @Override
     public T call(DataResponse<T> tDataResponse)
     {
-//        if("2000".equals(tDataResponse.getCode())) {
-//            throw new NetException(tDataResponse.getMsg());
-//        }
         return tDataResponse.getData();
     }
 }

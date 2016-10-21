@@ -31,6 +31,11 @@ public class ActivityPresenter<V extends ActivityView> extends BasePresenter<V>
         return getMvpView().bindToLifecycle();
     }
 
+    /**
+     * 前置工作让事件处理在分线程
+     * @param <T>
+     * @return
+     */
     public <T> Observable.Transformer<T, T> callbackOnIOThread()
     {
         return tObservable -> tObservable.subscribeOn(Schedulers.io())
@@ -38,6 +43,11 @@ public class ActivityPresenter<V extends ActivityView> extends BasePresenter<V>
                 .compose(bindToLifecycle());
     }
 
+    /**
+     * 回到主线程准备回调到界面
+     * @param <T>
+     * @return
+     */
     public <T> Observable.Transformer<T, T> verifyOnMainThread()
     {
         return tObservable -> tObservable.filter(t -> isViewAttached())

@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
                         hasPermission -> {
                             if (hasPermission)
                             {
-                                mPresenter.action2second();
+                                mPresenter.action2second(mContext);
                             } else
                             {
                                 LogUtil.e(TAG, "initEvent : 没有获取到权限");
