@@ -30,7 +30,7 @@ public class MainPresenterImpl extends ActivityPresenter<MainViewImpl>
             getMvpView().action2second();
         }
 
-        ClientManager.getClient("ip").create(ApiService.class)
+        ClientManager.getClient("http://192.168.1.70:9080").create(ApiService.class)
                 .getUserList("3")
                 .compose(callbackOnIOThread())
                 .map(listDataResponse -> listDataResponse.getData())

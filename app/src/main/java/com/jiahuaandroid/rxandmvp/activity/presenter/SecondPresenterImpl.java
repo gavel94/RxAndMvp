@@ -11,7 +11,6 @@ import com.jiahuaandroid.rxandmvp.network.RetryWithDelay;
 import com.jiahuaandroid.rxandmvp.utils.RxUtils;
 
 import rx.Subscriber;
-import rx.functions.Action0;
 
 /**
  * Created by jhhuang on 2016/9/18.
@@ -30,14 +29,7 @@ public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
 //                .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxUtils.rxSchedulerHelper())
                 .retryWhen(new RetryWithDelay(3, 100))
-                .doOnCompleted(new Action0()
-                {
-                    @Override
-                    public void call()
-                    {
-                        LogUtil.e(TAG, "doOnCompleted : thread = " + Thread.currentThread().getName());
-                    }
-                })
+                .doOnCompleted(() -> LogUtil.e(TAG, "doOnCompleted : thread = " + Thread.currentThread().getName()))
                 .doOnError(error -> {
                     LogUtil.e(TAG, "doOnError : thread = " + Thread.currentThread().getName());
                     error.printStackTrace();

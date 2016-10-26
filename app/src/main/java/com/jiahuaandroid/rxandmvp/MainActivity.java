@@ -16,18 +16,20 @@ import com.jiahuaandroid.rxandmvp.core.BaseActivity;
 import com.jiahuaandroid.rxandmvp.databinding.ActivityMainBinding;
 import com.jiahuaandroid.rxandmvp.model.event.NetWorkChangeEvent;
 import com.jiahuaandroid.rxandmvp.utils.RxUtils;
-import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import cn.jiahua.DbService;
+import cn.jiahua.bean.Contact;
+import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity<MainPresenterImpl> implements MainViewImpl
 {
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
-    private String[] permissions = {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-            , Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
     protected MainPresenterImpl createPresenter()
@@ -39,6 +41,13 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
     protected void loadContentView()
     {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    }
+
+    @Override
+    protected void initViews(Bundle savedInstanceState)
+    {
+        super.initViews(savedInstanceState);
+        binding.btnClick.setText(TAG);
     }
 
     @Override
@@ -57,6 +66,37 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
     }
 
     @Override
+    protected void initData()
+    {
+        super.initData();
+        Contact contact = new Contact();
+        contact.setId("1");
+        contact.setRealName("测试");
+        DbService.getDaoSession().getContactDao().rx().insertOrReplace(contact)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Contact>()
+                {
+                    @Override
+                    public void onCompleted()
+                    {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e)
+                    {
+
+                    }
+
+                    @Override
+                    public void onNext(Contact contact)
+                    {
+                        LogUtil.e(TAG, "onNext : Contact = " + contact.getId() + "----" + contact.getRealName());
+                    }
+                });
+    }
+
+    @Override
     protected void onDestroy()
     {
         super.onDestroy();
@@ -68,21 +108,7 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
         super.initEvent();
         RxView.clicks(binding.btnClick)
                 .throttleFirst(2, TimeUnit.SECONDS)
-                .delay(2, TimeUnit.SECONDS)
-                .compose(RxPermissions.getInstance(mContext).ensureEach(permissions))
-                .buffer(permissions.length)
-                .map(permissions -> {
-                    boolean hasPermission = true;
-                    for (Permission permission : permissions)
-                    {
-                        if (!permission.granted)
-                        {
-                            hasPermission = false;
-                            break;
-                        }
-                    }
-                    return hasPermission;
-                })
+                .compose(RxPermissions.getInstance(mContext).ensure(Manifest.permission.READ_EXTERNAL_STORAGE))
                 .subscribe(
                         hasPermission -> {
                             if (hasPermission)
@@ -96,6 +122,11 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
                         Throwable::printStackTrace,
                         () -> LogUtil.e(TAG, "initEvent : com"));
 
+//        RxView.clicks(binding.btnClick)
+//                .throttleFirst(2, TimeUnit.SECONDS)
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribe(aVoid -> mPresenter.action2second(mContext),Throwable::printStackTrace);
+
     }
 
     @Override
@@ -103,6 +134,12 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Mai
     {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void notifyUserList(List<String> strings)
+    {
+
     }
 
 }
