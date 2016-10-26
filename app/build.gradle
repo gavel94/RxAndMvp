@@ -12,7 +12,7 @@ android {
 
         sourceSets {
             main {
-                java.srcDirs = ['src/main/java', 'src/main/java-gen']
+                java.srcDirs = ['src/main/java', 'src/main/java-gen', 'src/main/java-generated']
                 jniLibs.srcDirs = ['libs']
             }
         }
@@ -22,9 +22,9 @@ android {
             targetCompatibility JavaVersion.VERSION_1_8
         }
 
-//        greendao {
-//            targetGenDir 'src/main/java-gen/dao'
-//        }
+        greendao {
+            targetGenDir 'src/main/java-generated/'
+        }
 
         applicationId "com.jiahuaandroid.rxandmvp"
         minSdkVersion 15
