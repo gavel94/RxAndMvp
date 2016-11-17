@@ -8,4 +8,13 @@ package com.jiahuaandroid.rxandmvp.core.mvp.interfaces;
 
 public interface MvpView
 {
+
+    void showLoading();
+
+    void hideLoading();
+
+    void toast(String msg);
+
+    void toast(int resId);
+
 }

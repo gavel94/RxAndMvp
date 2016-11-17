@@ -2,11 +2,11 @@ package com.jiahuaandroid.rxandmvp.activity.presenter;
 
 import android.content.Context;
 
-import com.jiahuaandroid.rxandmvp.activity.module.ApiService;
+import com.jiahuaandroid.rxandmvp.activity.module.ApiMoudle;
 import com.jiahuaandroid.rxandmvp.activity.view.MainViewImpl;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
 import com.jiahuaandroid.rxandmvp.model.UserListEntity;
-import com.jiahuaandroid.rxandmvp.network.ClientManager;
+import com.jiahuaandroid.rxandmvp.network.DataResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,12 @@ import rx.functions.Func1;
 public class MainPresenterImpl extends ActivityPresenter<MainViewImpl>
 {
     private static final String TAG = "MainPresenterImpl";
+    private ApiMoudle mMoudle;
+
+    public MainPresenterImpl()
+    {
+        mMoudle = new ApiMoudle();
+    }
 
     public void action2second(Context mContext)
     {
@@ -29,11 +35,9 @@ public class MainPresenterImpl extends ActivityPresenter<MainViewImpl>
         {
             getMvpView().action2second();
         }
-
-        ClientManager.getClient("http://192.168.1.70:9080").create(ApiService.class)
-                .getUserList("3")
+        mMoudle.getUserList("http://192.168.1.70:9080","3")
                 .compose(callbackOnIOThread())
-                .map(listDataResponse -> listDataResponse.getData())
+                .map(DataResponse::getData)
                 .flatMap(new Func1<List<UserListEntity.DataEntity>, Observable<List<String>>>()
                 {
                     @Override

@@ -12,7 +12,7 @@ android {
 
         sourceSets {
             main {
-                java.srcDirs = ['src/main/java', 'src/main/java-gen', 'src/main/java-generated']
+                java.srcDirs = ['src/main/java', 'src/main/java-gen']
                 jniLibs.srcDirs = ['libs']
             }
         }
@@ -23,7 +23,9 @@ android {
         }
 
         greendao {
-            targetGenDir 'src/main/java-generated/'
+            schemaVersion 1
+            daoPackage 'cn.jiahua.generated'
+            targetGenDir 'src/main/java-gen/'
         }
 
         applicationId "com.jiahuaandroid.rxandmvp"

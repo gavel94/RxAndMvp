@@ -9,8 +9,8 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 
 import cn.jiahua.DbService;
 import cn.jiahua.THDevOpenHelper;
-import cn.jiahua.bean.DaoMaster;
-import cn.jiahua.bean.DaoSession;
+import cn.jiahua.generated.DaoMaster;
+import cn.jiahua.generated.DaoSession;
 
 /**
  * Created by jhhuang on 2016/8/24.

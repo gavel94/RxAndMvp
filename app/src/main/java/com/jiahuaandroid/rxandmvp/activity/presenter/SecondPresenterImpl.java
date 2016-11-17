@@ -3,10 +3,9 @@ package com.jiahuaandroid.rxandmvp.activity.presenter;
 import android.content.Context;
 
 import com.jiahuaandroid.basetools.utils.LogUtil;
-import com.jiahuaandroid.rxandmvp.activity.module.ApiService;
+import com.jiahuaandroid.rxandmvp.activity.module.ApiMoudle;
 import com.jiahuaandroid.rxandmvp.activity.view.SecondViewImpl;
 import com.jiahuaandroid.rxandmvp.core.mvp.ActivityPresenter;
-import com.jiahuaandroid.rxandmvp.network.ClientManager;
 import com.jiahuaandroid.rxandmvp.network.RetryWithDelay;
 import com.jiahuaandroid.rxandmvp.utils.RxUtils;
 
@@ -20,10 +19,16 @@ import rx.Subscriber;
 public class SecondPresenterImpl extends ActivityPresenter<SecondViewImpl>
 {
     private static final String TAG = "SecondPresenterImpl";
+    private ApiMoudle mMoudle;
+
+    public SecondPresenterImpl()
+    {
+        mMoudle = new ApiMoudle();
+    }
 
     public void loadUserList(Context mContext)
     {
-        ClientManager.getClient(ApiService.HOST_URL).create(ApiService.class).testString()
+        mMoudle.testString()
 //                .subscribeOn(Schedulers.io())
                 .compose(bindToLifecycle())
 //                .observeOn(AndroidSchedulers.mainThread())

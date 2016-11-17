@@ -4,9 +4,12 @@ import android.support.annotation.NonNull;
 
 import com.jiahuaandroid.rxandmvp.core.mvp.interfaces.ActivityView;
 import com.jiahuaandroid.rxandmvp.network.RetryWithDelay;
+import com.jiahuaandroid.rxandmvp.network.ex.ResultException;
+import com.jiahuaandroid.rxandmvp.network.ex.ToastException;
 import com.trello.rxlifecycle.ActivityEvent;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -74,8 +77,35 @@ public class ActivityPresenter<V extends ActivityView> extends BasePresenter<V>
         public void onError(Throwable e)
         {
             getMvpView().hideLoading();
-            // TODO: 2016/10/21 处理约定异常
+            if (e instanceof ToastException)
+            {
+                getMvpView().toast(e.getMessage());
+            } else if (e instanceof ResultException)
+            {
+                onResultError(((ResultException) e));
+            } else if (e instanceof HttpException)
+            {
+                onHttpError(((HttpException) e));
+            } else
+            {
+                onOtherError(e);
+            }
             e.printStackTrace();
+        }
+
+        public void onOtherError(Throwable e)
+        {
+            getMvpView().toast("未知错误");
+        }
+
+        public void onResultError(ResultException e)
+        {
+            getMvpView().toast(e.getMessage());
+        }
+
+        public void onHttpError(HttpException e)
+        {
+            getMvpView().toast("网络错误");
         }
 
     }

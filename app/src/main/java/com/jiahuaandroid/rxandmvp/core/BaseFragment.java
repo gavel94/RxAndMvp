@@ -1,11 +1,13 @@
 package com.jiahuaandroid.rxandmvp.core;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jiahuaandroid.basetools.utils.CUtils;
 import com.jiahuaandroid.rxandmvp.core.mvp.FragmentPresenter;
 import com.jiahuaandroid.rxandmvp.core.mvp.MvpFragment;
 
@@ -17,6 +19,14 @@ import com.jiahuaandroid.rxandmvp.core.mvp.MvpFragment;
 public abstract class BaseFragment<T extends FragmentPresenter> extends MvpFragment<T>
 {
     private static final String TAG = "BaseFragment";
+    protected Activity mActivity;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        mActivity = getActivity();
+    }
 
     @Nullable
     @Override
@@ -63,5 +73,41 @@ public abstract class BaseFragment<T extends FragmentPresenter> extends MvpFragm
     protected void initEvent()
     {
 
+    }
+
+    @Override
+    public void hideLoading()
+    {
+        try
+        {
+            ((BaseActivity) mActivity).hideLoading();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showLoading()
+    {
+        try
+        {
+            ((BaseActivity) mActivity).showLoading();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void toast(String msg)
+    {
+        CUtils.showMsg(msg);
+    }
+
+    @Override
+    public void toast(int resId)
+    {
+        CUtils.showMsg(resId);
     }
 }

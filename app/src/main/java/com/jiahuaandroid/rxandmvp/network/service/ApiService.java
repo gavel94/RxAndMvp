@@ -1,4 +1,4 @@
-package com.jiahuaandroid.rxandmvp.activity.module;
+package com.jiahuaandroid.rxandmvp.network.service;
 
 
 import com.jiahuaandroid.rxandmvp.model.UserListEntity;

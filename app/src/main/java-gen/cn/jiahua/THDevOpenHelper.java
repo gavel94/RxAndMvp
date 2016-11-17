@@ -3,7 +3,7 @@ package cn.jiahua;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import cn.jiahua.bean.DaoMaster;
+import cn.jiahua.generated.DaoMaster;
 
 
 /**

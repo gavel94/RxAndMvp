@@ -176,9 +176,12 @@ public abstract class BaseActivity<T extends ActivityPresenter> extends MvpActiv
     @Override
     public void toast(String msg)
     {
-        /**
-         * toast数据
-         */
         CUtils.showMsg(msg);
+    }
+
+    @Override
+    public void toast(int resId)
+    {
+        CUtils.showMsg(resId);
     }
 }

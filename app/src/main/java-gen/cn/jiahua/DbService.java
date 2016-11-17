@@ -3,8 +3,8 @@ package cn.jiahua;
 import android.app.Application;
 import android.content.Context;
 
-import cn.jiahua.bean.DaoMaster;
-import cn.jiahua.bean.DaoSession;
+import cn.jiahua.generated.DaoMaster;
+import cn.jiahua.generated.DaoSession;
 
 
 /**

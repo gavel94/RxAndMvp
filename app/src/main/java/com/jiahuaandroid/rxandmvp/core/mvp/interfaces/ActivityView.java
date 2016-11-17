@@ -16,9 +16,4 @@ public interface ActivityView extends MvpView
 
     <T> LifecycleTransformer<T> bindToLifecycle();
 
-    void showLoading();
-
-    void hideLoading();
-
-    void toast(String msg);
 }
