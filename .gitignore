@@ -1,6 +1,7 @@
 .gradle
 .idea
 build
+gradlew
 /local.properties# built application files
 *.apk
 *.ap_
@@ -14,6 +15,7 @@ build
 # generated files
 bin/
 gen/
+gradle/
 
 # Local configuration file (sdk path, etc)
 local.properties
